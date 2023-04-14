@@ -1,0 +1,10 @@
+description: >-
+  The request cannot be served because there is a conflinct on the resource. 
+  e.g. A transport tracking is already cancelled or a waypoint is already closed.
+content:
+  application/problem+json:
+    schema:
+      $ref: ../schemas/Problem.yaml
+    example:
+      title: Conflict
+      status: 409

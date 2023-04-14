@@ -1,0 +1,11 @@
+description: >
+  The request is valid but has been refused because the caller, identified by
+  the request credentials (e.g. th Bearer token), does not have sufficient
+  privileges.
+content:
+  application/problem+json:
+    schema:
+      $ref: ../schemas/Problem.yaml
+    example:
+      title: Forbidden request
+      status: 403

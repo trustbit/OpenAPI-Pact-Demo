@@ -1,0 +1,8 @@
+description: The Resource does not exist.
+content:
+  application/problem+json:
+    schema:
+      $ref: ../schemas/Problem.yaml
+    example:
+      title: Object not found
+      status: 404

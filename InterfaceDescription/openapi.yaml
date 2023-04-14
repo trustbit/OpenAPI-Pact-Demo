@@ -1,0 +1,32 @@
+openapi: 3.0.1
+servers:
+  - url: https://www.apidemoserver.com/api
+    description: Default server
+info:
+  version: 1.0.0
+  title: API for Demo
+  description: |-
+    # Goal
+    This API Description is used as the basis to show code generating use-cases.
+
+
+    <SecurityDefinitions />
+
+
+
+
+paths:
+ /person:
+  $ref: paths\person.yaml
+ /person/{person-id}:
+  $ref: paths\person@person-id.yaml
+
+components: 
+  securitySchemes:
+    httpBasic:
+      description: Die Kommunikation erfolgt über HTTPS (HTTP über SSL bzw. TLS).
+      type: http
+      scheme: basic
+security:
+  - httpBasic: []
+

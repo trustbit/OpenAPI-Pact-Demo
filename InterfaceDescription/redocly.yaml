@@ -1,0 +1,30 @@
+apis:
+  main@v3:
+    root: ./openapi.yaml
+#styleguide:
+#  extends:
+#    - recommended
+rules:
+  tag-description: off
+  operation-summary: off
+  no-unresolved-refs: error
+  no-unused-components: error
+  operation-2xx-response: off
+  operation-operationId: off
+  operation-singular-tag: error
+  no-enum-type-mismatch: error
+  no-identical-paths: error
+  no-ambiguous-paths: error
+  no-invalid-media-type-examples:
+    severity: off
+    disallowAdditionalProperties: false
+  spec: error
+features.openapi:
+  pagination: section
+  showConsole: true
+#  generateCodeSamples:
+#    languages:
+#      - lang: curl
+#      - lang: Node.js
+#      - lang: Python
+

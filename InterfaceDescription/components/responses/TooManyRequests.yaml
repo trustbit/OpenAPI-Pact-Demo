@@ -1,0 +1,10 @@
+description: >-
+  The request cannot be served because the app's rate limit has been exhausted
+  for this resource.
+content:
+  application/problem+json:
+    schema:
+      $ref: ../schemas/Problem.yaml
+    example:
+      title: Too Many Request
+      status: 429

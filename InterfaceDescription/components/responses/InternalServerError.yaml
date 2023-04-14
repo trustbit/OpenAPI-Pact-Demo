@@ -1,0 +1,8 @@
+description: Something on the server is broken. This is usually a temporary issue.
+content:
+  application/problem+json:
+    schema:
+      $ref: ../schemas/Problem.yaml
+    example:
+      title: Unexpected server error
+      status: 500

@@ -1,0 +1,149 @@
+get:
+  tags:
+    - Person
+  summary: Query Person
+  description: 'This Endpoint will be used to get the person information for a specific Person identified by the person-id.'
+  operationId: getPerson
+  parameters:
+    - in: path
+      name: person-id
+      required: true
+      description: Eindeutige ID für die Personenstammdaten als UUID
+      schema: 
+        type: string
+        format: UUID
+  responses:
+    '200':
+      description: The JSON Object for the corresponding person.
+      content:
+        application/json:
+          schema:
+            $ref: ..\components\schemas\Person.yaml
+    '400':
+      description: 'BAD REQUEST: The Request is not valid.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: ../components/schemas/Problem.yaml
+          example:
+            title: BAD REQUEST
+            status: 400      
+    '401':
+      description: 'UNAUTHORIZED: The User is not authorized to call the endpoint'
+      content:
+        application/problem+json:
+          schema:
+            $ref: ../components/schemas/Problem.yaml
+          example:
+            title: UNAUTHORIZED
+            status: 401
+    '500':
+      description: 'INTERNAL SERVER ERROR: Other Errors on Server.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: ../components/schemas/Problem.yaml
+          example:
+            title: INTERNAL SERVER ERROR
+            status: 500
+patch:
+  tags:
+    - Person
+  summary: Update Person
+  description: 'Updates a Person according to the given request object.'
+  operationId: updatePerson
+  parameters:
+    - in: path
+      name: person-id
+      required: true
+      description: Eindeutige ID für die Personenstammdaten als UUID
+      schema: 
+        type: string
+        format: UUID
+  requestBody: 
+    content:
+      application/json:
+        schema:
+          $ref: ..\components\schemas\Person.yaml
+  responses:
+    '201':
+      description: 'UPDATE: The ressource was successfully changed.'
+      headers:             
+        Location:
+          schema: 
+            type: string
+            format: URI
+            description: The Location of the changed resource
+            example: https://www.apidemoserver.com/api/v1/person/5399b86a-d928-48b5-923d-b656d36b610a
+
+    '400':
+      description: 'BAD REQUEST: The Request is not valid.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: ../components/schemas/Problem.yaml
+          example:
+            title: BAD REQUEST
+            status: 400      
+    '401':
+      description: 'UNAUTHORIZED: The User is not authorized to call the endpoint'
+      content:
+        application/problem+json:
+          schema:
+            $ref: ../components/schemas/Problem.yaml
+          example:
+            title: UNAUTHORIZED
+            status: 401
+    '500':
+      description: 'INTERNAL SERVER ERROR: Other Errors on Server.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: ../components/schemas/Problem.yaml
+          example:
+            title: INTERNAL SERVER ERROR
+            status: 500
+delete:
+  tags:
+    - Person
+  summary: Delete Person
+  description: 'Deletes a Person identified by its person-id'
+  operationId: deletePerson
+  parameters:
+    - in: path
+      name: person-id
+      required: true
+      description: Eindeutige ID für die Personenstammdaten als UUID
+      schema: 
+        type: string
+        format: UUID
+  responses:
+    '204':
+      description: 'NO CONTENT: Delete was successfully performed.'
+    '400':
+      description: 'BAD REQUEST: The Request is not valid.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: ../components/schemas/Problem.yaml
+          example:
+            title: BAD REQUEST
+            status: 400      
+    '401':
+      description: 'UNAUTHORIZED: The User is not authorized to call the endpoint'
+      content:
+        application/problem+json:
+          schema:
+            $ref: ../components/schemas/Problem.yaml
+          example:
+            title: UNAUTHORIZED
+            status: 401
+    '500':
+      description: 'INTERNAL SERVER ERROR: Other Errors on Server.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: ../components/schemas/Problem.yaml
+          example:
+            title: INTERNAL SERVER ERROR
+            status: 500

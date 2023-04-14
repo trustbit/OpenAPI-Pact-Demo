@@ -1,0 +1,8 @@
+description: Caller authorization is missing or invalid.
+content:
+  application/problem+json:
+    schema:
+      $ref: ../schemas/Problem.yaml
+    example:
+      title: Unauthorized request
+      status: 401

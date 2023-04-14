@@ -1,0 +1,320 @@
+openapi: 3.0.1
+servers:
+  - url: https://www.apidemoserver.com/api
+    description: Default server
+info:
+  version: 1.0.0
+  title: API for Demo
+  description: |-
+    # Goal
+    This API Description is used as the basis to show code generating use-cases.
+
+
+    <SecurityDefinitions />
+paths:
+  /person:
+    get:
+      tags:
+        - Person
+      summary: Query Persons
+      description: This Endpoint will be used to get a list of all persons.
+      operationId: getPersons
+      responses:
+        '200':
+          description: Array of all persons.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+        '400':
+          description: 'BAD REQUEST: Die Anfrage ist nicht valide.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                title: BAD REQUEST
+                status: 400
+        '401':
+          description: 'UNAUTHORIZED: Der Benutzer ist nicht berechtigt diesen Service aufzurufen'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                title: UNAUTHORIZED
+                status: 401
+        '500':
+          description: 'INTERNAL SERVER ERROR: Alle sonstigen Fehler'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                title: INTERNAL SERVER ERROR
+                status: 500
+  /person/{person-id}:
+    get:
+      tags:
+        - Person
+      summary: Query Person
+      description: This Endpoint will be used to get the person information for a specific Person identified by the person-id.
+      operationId: getPerson
+      parameters:
+        - in: path
+          name: person-id
+          required: true
+          description: Eindeutige ID für die Personenstammdaten als UUID
+          schema:
+            type: string
+            format: UUID
+      responses:
+        '200':
+          description: The JSON Object for the corresponding person.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '400':
+          description: 'BAD REQUEST: The Request is not valid.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                title: BAD REQUEST
+                status: 400
+        '401':
+          description: 'UNAUTHORIZED: The User is not authorized to call the endpoint'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                title: UNAUTHORIZED
+                status: 401
+        '500':
+          description: 'INTERNAL SERVER ERROR: Other Errors on Server.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                title: INTERNAL SERVER ERROR
+                status: 500
+    patch:
+      tags:
+        - Person
+      summary: Update Person
+      description: Updates a Person according to the given request object.
+      operationId: updatePerson
+      parameters:
+        - in: path
+          name: person-id
+          required: true
+          description: Eindeutige ID für die Personenstammdaten als UUID
+          schema:
+            type: string
+            format: UUID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '201':
+          description: 'UPDATE: The ressource was successfully changed.'
+          headers:
+            Location:
+              schema:
+                type: string
+                format: URI
+                description: The Location of the changed resource
+                example: https://www.apidemoserver.com/api/v1/person/5399b86a-d928-48b5-923d-b656d36b610a
+        '400':
+          description: 'BAD REQUEST: The Request is not valid.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                title: BAD REQUEST
+                status: 400
+        '401':
+          description: 'UNAUTHORIZED: The User is not authorized to call the endpoint'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                title: UNAUTHORIZED
+                status: 401
+        '500':
+          description: 'INTERNAL SERVER ERROR: Other Errors on Server.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                title: INTERNAL SERVER ERROR
+                status: 500
+    delete:
+      tags:
+        - Person
+      summary: Delete Person
+      description: Deletes a Person identified by its person-id
+      operationId: deletePerson
+      parameters:
+        - in: path
+          name: person-id
+          required: true
+          description: Eindeutige ID für die Personenstammdaten als UUID
+          schema:
+            type: string
+            format: UUID
+      responses:
+        '204':
+          description: 'NO CONTENT: Delete was successfully performed.'
+        '400':
+          description: 'BAD REQUEST: The Request is not valid.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                title: BAD REQUEST
+                status: 400
+        '401':
+          description: 'UNAUTHORIZED: The User is not authorized to call the endpoint'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                title: UNAUTHORIZED
+                status: 401
+        '500':
+          description: 'INTERNAL SERVER ERROR: Other Errors on Server.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              example:
+                title: INTERNAL SERVER ERROR
+                status: 500
+components:
+  securitySchemes:
+    httpBasic:
+      description: Die Kommunikation erfolgt über HTTPS (HTTP über SSL bzw. TLS).
+      type: http
+      scheme: basic
+  schemas:
+    Person:
+      type: object
+      description: Persondescription as an object
+      required:
+        - personId
+        - name
+        - gender
+      properties:
+        personId:
+          type: string
+          format: UUID
+          description: Unique ID of the person
+          readOnly: true
+          example: 5399b86a-d928-48b5-923d-b656d36b610a
+        name:
+          type: object
+          properties:
+            surname:
+              type: string
+              format: string
+              maxLength: 128
+              minLength: 1
+              example: John
+            lastname:
+              type: string
+              format: string
+              maxLength: 128
+              minLength: 1
+              example: Doe
+        gender:
+          type: string
+          format: enum
+          enum:
+            - m
+            - f
+            - d
+          example: m
+        address:
+          type: object
+          properties:
+            street:
+              type: string
+              format: string
+              maxLength: 128
+              minLength: 1
+              example: Evergreen Terace
+            houseNumber:
+              type: string
+              format: string
+              maxLength: 10
+              minLength: 1
+              example: 7a
+            postalCode:
+              type: string
+              format: string
+              maxLength: 10
+              minLength: 1
+              example: 1234
+            city:
+              type: string
+              format: string
+              maxLength: 128
+              minLength: 1
+              example: Springfield
+        eMail:
+          type: string
+          format: eMail
+          pattern: ^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$
+          example: john@doe.com
+    Problem:
+      type: object
+      description: This object represents a problem and is structured after [RFC7807]
+      properties:
+        type:
+          type: string
+          format: uri
+          description: |
+            A absolute URI reference [RFC 3986] that identifies the problem type.
+          default: about:blank
+        title:
+          type: string
+          description: |
+            A short, human-readable summary of the problem type.
+          example: Not Found
+        status:
+          type: integer
+          format: int32
+          description: |
+            The HTTP status code generated by the origin server for this occurrence of the problem.
+          minimum: 100
+          maximum: 600
+          exclusiveMaximum: true
+          example: 404
+        detail:
+          type: string
+          description: |
+            A human-readable explanation specific to this occurrence of the problem.
+          example: The requested resource could not be found.
+        instance:
+          type: string
+          format: uri
+          description: |
+            A URI reference that identifies the specific
+            occurrence of the problem.  It may or may not yield further
+            information if dereferenced.
+security:
+  - httpBasic: []

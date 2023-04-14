@@ -1,0 +1,65 @@
+type: object
+description: Persondescription as an object
+required:
+  - personId
+  - name
+  - gender
+properties:
+  personId:
+    type: string
+    format: UUID
+    description: Unique ID of the person
+    readOnly: true
+    example: 5399b86a-d928-48b5-923d-b656d36b610a
+  name:
+    type: object
+    properties: 
+      surname:
+        type: string
+        format: string
+        maxLength: 128
+        minLength: 1
+        example: John
+      lastname:
+        type: string 
+        format: string
+        maxLength: 128
+        minLength: 1
+        example: Doe
+  gender:
+    type: string
+    format: enum
+    enum: [m,f,d]
+    example: m
+  address:
+    type: object
+    properties: 
+      street:
+        type: string
+        format: string
+        maxLength: 128
+        minLength: 1
+        example: Evergreen Terace
+      houseNumber:
+        type: string
+        format: string
+        maxLength: 10
+        minLength: 1
+        example: 7a
+      postalCode:
+        type: string
+        format: string
+        maxLength: 10
+        minLength: 1
+        example: 1234
+      city:
+        type: string
+        format: string
+        maxLength: 128
+        minLength: 1
+        example: Springfield
+  eMail:
+    type: string
+    format: eMail
+    pattern: ^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$
+    example: john@doe.com
