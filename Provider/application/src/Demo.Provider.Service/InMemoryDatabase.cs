@@ -24,6 +24,7 @@ namespace Demo.Provider.Service
 
         public void Update(Guid id, Person person)
         {
+            person.PersonId = id;
             _database.AddOrUpdate(id, person, (_, _) => person);
         }
     }

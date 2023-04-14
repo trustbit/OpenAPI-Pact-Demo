@@ -166,7 +166,7 @@ namespace Demo.Provider.Service.Controllers
             // return StatusCode(500, default(Problem));
             if (personId == Guid.Empty || person is null)
                 return BadRequest();
-
+            
             _database.Update(personId, person);
             var redirectTo = this.Url.RouteUrl("GetPerson", values : new { personId});
             // var redirectTo = this.Url.Link("GetPerson", values : new { personId});
