@@ -77,8 +77,7 @@ namespace Demo.Consumer.Client.Test
                     Status = 201,
                     Headers = new Dictionary<string, object>
                     {
-                        { "Location", "~/api/person/dbe553a1-c2b4-4759-a95b-735a656033c8" },
-                        { "Content-Type", "application/json; charset=utf-8" }
+                        { "Location", "/api/person/dbe553a1-c2b4-4759-a95b-735a656033c8" }
                     }
                 });
 
@@ -109,9 +108,9 @@ namespace Demo.Consumer.Client.Test
                     {
                         new
                         {
-                            Name = new { Surname = "first", Lastname = "last" },
-                            Gender = "M",
-                            PersonId = "dbe553a1-c2b4-4759-a95b-735a656033c8"
+                            name = new { surname = "first", lastname = "last" },
+                            gender = "m",
+                            personId = "dbe553a1-c2b4-4759-a95b-735a656033c8"
                         }
                     }
                 });
@@ -147,9 +146,9 @@ namespace Demo.Consumer.Client.Test
                     Body =
                         new
                         {
-                            Name = new { Surname = "first", Lastname = "last" },
-                            Gender = "M",
-                            PersonId = "dbe553a1-c2b4-4759-a95b-735a656033c8"
+                            name = new { surname = "first", lastname = "last" },
+                            gender = "m",
+                            personId = "dbe553a1-c2b4-4759-a95b-735a656033c8"
                         }
                 });
 
@@ -176,10 +175,6 @@ namespace Demo.Consumer.Client.Test
                 .WillRespondWith(new ProviderServiceResponse
                 {
                     Status = 204,
-                    Headers = new Dictionary<string, object>
-                    {
-                        { "Content-Type", "application/json; charset=utf-8" }
-                    },
                 });
 
             var identifier = new Guid("dbe553a1-c2b4-4759-a95b-735a656033c8");

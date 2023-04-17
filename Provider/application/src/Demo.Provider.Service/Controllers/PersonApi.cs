@@ -21,7 +21,7 @@ using Demo.Provider.Service.Attributes;
 using Demo.Provider.Service.Models;
 
 namespace Demo.Provider.Service.Controllers
-{ 
+{
     /// <summary>
     /// 
     /// </summary>
@@ -34,6 +34,7 @@ namespace Demo.Provider.Service.Controllers
         {
             _database = database;
         }
+
         /// <summary>
         /// Delete Person
         /// </summary>
@@ -48,11 +49,12 @@ namespace Demo.Provider.Service.Controllers
         [ValidateModelState]
         [SwaggerOperation("DeletePerson")]
         [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "BAD REQUEST: The Request is not valid.")]
-        [SwaggerResponse(statusCode: 401, type: typeof(Problem), description: "UNAUTHORIZED: The User is not authorized to call the endpoint")]
-        [SwaggerResponse(statusCode: 500, type: typeof(Problem), description: "INTERNAL SERVER ERROR: Other Errors on Server.")]
-        public virtual IActionResult DeletePerson([FromRoute (Name = "person-id")][Required]Guid personId)
+        [SwaggerResponse(statusCode: 401, type: typeof(Problem),
+            description: "UNAUTHORIZED: The User is not authorized to call the endpoint")]
+        [SwaggerResponse(statusCode: 500, type: typeof(Problem),
+            description: "INTERNAL SERVER ERROR: Other Errors on Server.")]
+        public virtual IActionResult DeletePerson([FromRoute(Name = "person-id")] [Required] Guid personId)
         {
-
             //TODO: Uncomment the next line to return response 204 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
             // return StatusCode(204);
             //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
@@ -66,7 +68,7 @@ namespace Demo.Provider.Service.Controllers
             if (_database.Remove(personId))
                 return NoContent();
 
-            return BadRequest(); 
+            return BadRequest();
         }
 
         /// <summary>
@@ -82,13 +84,15 @@ namespace Demo.Provider.Service.Controllers
         [Route("/api/person/{person-id}", Name = "GetPerson")]
         [ValidateModelState]
         [SwaggerOperation("GetPerson")]
-        [SwaggerResponse(statusCode: 200, type: typeof(Person), description: "The JSON Object for the corresponding person.")]
+        [SwaggerResponse(statusCode: 200, type: typeof(Person),
+            description: "The JSON Object for the corresponding person.")]
         [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "BAD REQUEST: The Request is not valid.")]
-        [SwaggerResponse(statusCode: 401, type: typeof(Problem), description: "UNAUTHORIZED: The User is not authorized to call the endpoint")]
-        [SwaggerResponse(statusCode: 500, type: typeof(Problem), description: "INTERNAL SERVER ERROR: Other Errors on Server.")]
-        public virtual IActionResult GetPerson([FromRoute (Name = "person-id")][Required]Guid personId)
+        [SwaggerResponse(statusCode: 401, type: typeof(Problem),
+            description: "UNAUTHORIZED: The User is not authorized to call the endpoint")]
+        [SwaggerResponse(statusCode: 500, type: typeof(Problem),
+            description: "INTERNAL SERVER ERROR: Other Errors on Server.")]
+        public virtual IActionResult GetPerson([FromRoute(Name = "person-id")] [Required] Guid personId)
         {
-
             //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
             // return StatusCode(200, default(Person));
             //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
@@ -118,12 +122,14 @@ namespace Demo.Provider.Service.Controllers
         [ValidateModelState]
         [SwaggerOperation("GetPersons")]
         [SwaggerResponse(statusCode: 200, type: typeof(List<Person>), description: "Array of all persons.")]
-        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "BAD REQUEST: Die Anfrage ist nicht valide.")]
-        [SwaggerResponse(statusCode: 401, type: typeof(Problem), description: "UNAUTHORIZED: Der Benutzer ist nicht berechtigt diesen Service aufzurufen")]
-        [SwaggerResponse(statusCode: 500, type: typeof(Problem), description: "INTERNAL SERVER ERROR: Alle sonstigen Fehler")]
+        [SwaggerResponse(statusCode: 400, type: typeof(Problem),
+            description: "BAD REQUEST: Die Anfrage ist nicht valide.")]
+        [SwaggerResponse(statusCode: 401, type: typeof(Problem),
+            description: "UNAUTHORIZED: Der Benutzer ist nicht berechtigt diesen Service aufzurufen")]
+        [SwaggerResponse(statusCode: 500, type: typeof(Problem),
+            description: "INTERNAL SERVER ERROR: Alle sonstigen Fehler")]
         public virtual IActionResult GetPersons()
         {
-
             //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
             // return StatusCode(200, default(List<Person>));
             //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
@@ -151,11 +157,13 @@ namespace Demo.Provider.Service.Controllers
         [ValidateModelState]
         [SwaggerOperation("UpdatePerson")]
         [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "BAD REQUEST: The Request is not valid.")]
-        [SwaggerResponse(statusCode: 401, type: typeof(Problem), description: "UNAUTHORIZED: The User is not authorized to call the endpoint")]
-        [SwaggerResponse(statusCode: 500, type: typeof(Problem), description: "INTERNAL SERVER ERROR: Other Errors on Server.")]
-        public virtual IActionResult UpdatePerson([FromRoute (Name = "person-id")][Required]Guid personId, [FromBody]Person person)
+        [SwaggerResponse(statusCode: 401, type: typeof(Problem),
+            description: "UNAUTHORIZED: The User is not authorized to call the endpoint")]
+        [SwaggerResponse(statusCode: 500, type: typeof(Problem),
+            description: "INTERNAL SERVER ERROR: Other Errors on Server.")]
+        public virtual IActionResult UpdatePerson([FromRoute(Name = "person-id")] [Required] Guid personId,
+            [FromBody] Person person)
         {
-
             //TODO: Uncomment the next line to return response 201 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
             // return StatusCode(201);
             //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
@@ -166,11 +174,11 @@ namespace Demo.Provider.Service.Controllers
             // return StatusCode(500, default(Problem));
             if (personId == Guid.Empty || person is null)
                 return BadRequest();
-            
+
             _database.Update(personId, person);
-            var redirectTo = this.Url.RouteUrl("GetPerson", values : new { personId});
+            var redirectTo = this.Url.RouteUrl("GetPerson", values: new { personId });
             // var redirectTo = this.Url.Link("GetPerson", values : new { personId});
-            return Created(Url.Content("~/api/person/" + personId),null);
+            return Created(Url.Content("~/api/person/" + personId), null);
         }
     }
 }

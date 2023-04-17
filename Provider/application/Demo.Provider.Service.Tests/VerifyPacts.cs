@@ -43,14 +43,13 @@ public class VerifyPacts : IClassFixture<ProviderApiFixture>
             "..",
             "..",
             "Consumer",
-            "application",
             "pacts",
             "demo.consumer-demo.provider.json");
 
         //Act / Assert
         IPactVerifier pactVerifier = new PactVerifier(config);
         pactVerifier.ProviderState($"{_fixture.ServerUri}provider-states")
-            .ServiceProvider("Demo.Provider", _fixture.ServerUri.ToString())
+            .ServiceProvider("Demo.Provider", _fixture.ServerUri.ToString().TrimEnd('/'))
             .PactUri(pactPath)
 
             // .PactBroker(System.Environment.GetEnvironmentVariable("PACT_BROKER_BASE_URL"),

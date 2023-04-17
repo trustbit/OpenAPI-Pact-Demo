@@ -43,8 +43,7 @@
       "response": {
         "status": 201,
         "headers": {
-          "Location": "~/api/person/dbe553a1-c2b4-4759-a95b-735a656033c8",
-          "Content-Type": "application/json; charset=utf-8"
+          "Location": "/api/person/dbe553a1-c2b4-4759-a95b-735a656033c8"
         }
       }
     },
@@ -61,12 +60,12 @@
           "Content-Type": "application/json; charset=utf-8"
         },
         "body": {
-          "Name": {
-            "Surname": "first",
-            "Lastname": "last"
+          "name": {
+            "surname": "first",
+            "lastname": "last"
           },
-          "Gender": "M",
-          "PersonId": "dbe553a1-c2b4-4759-a95b-735a656033c8"
+          "gender": "m",
+          "personId": "dbe553a1-c2b4-4759-a95b-735a656033c8"
         }
       }
     },
@@ -80,7 +79,6 @@
       "response": {
         "status": 204,
         "headers": {
-          "Content-Type": "application/json; charset=utf-8"
         }
       }
     },
@@ -98,12 +96,12 @@
         },
         "body": [
           {
-            "Name": {
-              "Surname": "first",
-              "Lastname": "last"
+            "name": {
+              "surname": "first",
+              "lastname": "last"
             },
-            "Gender": "M",
-            "PersonId": "dbe553a1-c2b4-4759-a95b-735a656033c8"
+            "gender": "m",
+            "personId": "dbe553a1-c2b4-4759-a95b-735a656033c8"
           }
         ]
       }
