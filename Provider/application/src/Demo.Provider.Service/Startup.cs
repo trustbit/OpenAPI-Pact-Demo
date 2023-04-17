@@ -47,6 +47,7 @@ namespace Demo.Provider.Service
         /// The application configuration.
         /// </summary>
         public IConfiguration Configuration { get; }
+        
 
         /// <summary>
         /// This method gets called by the runtime. Use this method to add services to the container.
@@ -54,22 +55,7 @@ namespace Demo.Provider.Service
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton(new Database(Array.Empty<Person>()));
-
-            // Add framework services.
-            services
-                // Don't need the full MVC stack for an API, see https://andrewlock.net/comparing-startup-between-the-asp-net-core-3-templates/
-                .AddControllers(options => {
-                    options.InputFormatters.Insert(0, new InputFormatterStream());
-                })
-                .AddNewtonsoftJson(opts =>
-                {
-                    opts.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                    opts.SerializerSettings.Converters.Add(new StringEnumConverter
-                    {
-                        NamingStrategy = new CamelCaseNamingStrategy()
-                    });
-                });
+            ConfigureApplication(services);
 
             services
                 .AddSwaggerGen(c =>
@@ -107,6 +93,24 @@ namespace Demo.Provider.Service
                     .AddSwaggerGenNewtonsoftSupport();
         }
 
+        public static void ConfigureApplication(IServiceCollection services)
+        {
+            services.AddSingleton(new Database(Array.Empty<Person>()));
+
+            // Add framework services.
+            services
+                // Don't need the full MVC stack for an API, see https://andrewlock.net/comparing-startup-between-the-asp-net-core-3-templates/
+                .AddControllers(options => { options.InputFormatters.Insert(0, new InputFormatterStream()); })
+                .AddNewtonsoftJson(opts =>
+                {
+                    opts.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    opts.SerializerSettings.Converters.Add(new StringEnumConverter
+                    {
+                        NamingStrategy = new CamelCaseNamingStrategy()
+                    });
+                });
+        }
+
         /// <summary>
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// </summary>
@@ -140,11 +144,13 @@ namespace Demo.Provider.Service
                     //TODO: Or alternatively use the original OpenAPI contract that's included in the static files
                     // c.SwaggerEndpoint("/openapi-original.json", "API for Demo Original");
                 });
+            UseRouting(app);
+        }
+
+        public static void UseRouting(IApplicationBuilder app)
+        {
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

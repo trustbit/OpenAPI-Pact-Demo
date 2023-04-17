@@ -51,7 +51,7 @@ namespace Demo.Consumer.Client.Test.Api
         public void InstanceTest()
         {
             // TODO uncomment below to test 'IsType' PersonApi
-            //Assert.IsType<PersonApi>(instance);
+            Assert.IsType<PersonApi>(instance);
         }
 
         /// <summary>

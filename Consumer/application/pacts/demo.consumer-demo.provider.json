@@ -1,0 +1,117 @@
+{
+  "consumer": {
+    "name": "Demo.Consumer"
+  },
+  "provider": {
+    "name": "Demo.Provider"
+  },
+  "interactions": [
+    {
+      "description": "A valid GET request for all persons",
+      "providerState": "There is no data",
+      "request": {
+        "method": "get",
+        "path": "/api/person"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": [
+
+        ]
+      }
+    },
+    {
+      "description": "A valid PATCH request for a new person",
+      "providerState": "There is no data",
+      "request": {
+        "method": "patch",
+        "path": "/api/person/dbe553a1-c2b4-4759-a95b-735a656033c8",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": {
+            "surname": "first",
+            "lastname": "last"
+          },
+          "gender": "m"
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "Location": "~/api/person/dbe553a1-c2b4-4759-a95b-735a656033c8",
+          "Content-Type": "application/json; charset=utf-8"
+        }
+      }
+    },
+    {
+      "description": "A valid GET request for a specific person",
+      "providerState": "There is a single person with id dbe553a1-c2b4-4759-a95b-735a656033c8",
+      "request": {
+        "method": "get",
+        "path": "/api/person/dbe553a1-c2b4-4759-a95b-735a656033c8"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "Name": {
+            "Surname": "first",
+            "Lastname": "last"
+          },
+          "Gender": "M",
+          "PersonId": "dbe553a1-c2b4-4759-a95b-735a656033c8"
+        }
+      }
+    },
+    {
+      "description": "A valid DELETE request for removing an existing person",
+      "providerState": "There is a single person with id dbe553a1-c2b4-4759-a95b-735a656033c8",
+      "request": {
+        "method": "delete",
+        "path": "/api/person/dbe553a1-c2b4-4759-a95b-735a656033c8"
+      },
+      "response": {
+        "status": 204,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        }
+      }
+    },
+    {
+      "description": "A valid GET request for all persons with existing data",
+      "providerState": "There is a single person with id dbe553a1-c2b4-4759-a95b-735a656033c8",
+      "request": {
+        "method": "get",
+        "path": "/api/person"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": [
+          {
+            "Name": {
+              "Surname": "first",
+              "Lastname": "last"
+            },
+            "Gender": "M",
+            "PersonId": "dbe553a1-c2b4-4759-a95b-735a656033c8"
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}

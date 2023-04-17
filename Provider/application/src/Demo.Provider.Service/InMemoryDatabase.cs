@@ -27,5 +27,10 @@ namespace Demo.Provider.Service
             person.PersonId = id;
             _database.AddOrUpdate(id, person, (_, _) => person);
         }
+
+        public void RemoveAll()
+        {
+            _database.Clear();
+        }
     }
 }
