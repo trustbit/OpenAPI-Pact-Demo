@@ -3,7 +3,7 @@
 1. Use the generator to create the stubs
    Using the <https://openapi-generator.tech/docs/generators/csharp-netcore/> 
 
-    ```
+    ```bash
     docker run --rm \
     -v ${PWD}/../:/local openapitools/openapi-generator-cli generate \
     -i /local/InterfaceDescription/openapi_bundled.yaml \
@@ -13,7 +13,7 @@
     ```
 
 2. Copy the generated stubs into `application` and change directory
-3. Implement Pact tests
+3. Implement our Pact tests and store them (e.g. <./pacts/demo.consumer-demo.provider.json> )
 
 # Pushing Data to Pact Broker
 
