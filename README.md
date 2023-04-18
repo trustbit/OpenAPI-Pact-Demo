@@ -1,10 +1,10 @@
 # Demo for integrating OpenAPI with Pact
 
-This application demos the workflow of a simple OpenAPI specification:
+This application demos the workflow of a simple [OpenAPI](https://spec.openapis.org/oas/v3.1.0) specification in combination with [Pact](https://pact.io/).
 
-- Defining and specifying the OpenAPI in <./InterfaceDescription>
-- Generating Consumer Stubs from the specification and defining the first `pacts` in `Consumer/README.md``
-- Generating Server Stubs, implementing the API and verifying the `pacts`` in `Provider/README.md`.
+- Defining and specifying the [OpenAPI Description](./InterfaceDescription/openapi.yaml)
+- Generating Consumer Stubs from the specification and defining the first `pacts` in [Consumer](Consumer/README.md)
+- Generating Server Stubs, implementing the API and verifying the `pacts` in [Provider](Provider/README.md)
 
 Besides storing and exchanging `pacts` via files an integration via <http://pactflow.io> is shown.
 
