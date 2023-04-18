@@ -17,12 +17,6 @@
 
 # Pushing Data to Pact Broker
 
-1. Obtain Token + Host configuration (from <https://trustbit.pactflow.io/settings/api-tokens>)
-```bash
-PACT_BROKER_BASE_URL="https://trustbit.pactflow.io"
-PACT_BROKER_TOKEN="xKT2uJxqKIP6RoqXzcgo4A"
-```
-
 2. Publish Pacts from `Consumer/pacts/demo.consumer-demo.provider.json` to broker
 ```bash
 docker run \
